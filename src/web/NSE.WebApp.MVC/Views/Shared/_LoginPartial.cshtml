@@ -1,0 +1,23 @@
+﻿@using NSE.WebApp.MVC.Extensions
+@inject IAspNetUser User;
+
+<ul class="navbar-nav">
+    @if (User.EstaAutenticado())
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" title="Manage">Olá @User.ObterUserEmail()</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Identidade" asp-action="Logout">Sair</a>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Identidade" asp-action="Registro">Crie sua conta</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Identidade" asp-action="Login">Login</a>
+        </li>
+    }
+</ul>

@@ -1,0 +1,52 @@
+﻿using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+
+namespace NSE.WebApp.MVC.Configuration
+{
+    public static class WebAppConfiguration
+    {
+        public static IServiceCollection AddMvcConfiguration(this IServiceCollection services)
+        {
+            services.AddControllersWithViews();
+
+            return services;
+        }
+
+        public static IApplicationBuilder UseMvcConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseExceptionHandler("/erro/500");
+
+            app.UseStatusCodePagesWithRedirects("/erro/{0}");
+
+            app.UseHsts();
+
+            app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseIdentityConfiguration();
+
+            var supportedCultures = new[] { new CultureInfo("pt-BR") };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("pt-BR"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            return app;
+        }
+    }
+}
