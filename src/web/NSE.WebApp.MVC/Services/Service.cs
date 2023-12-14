@@ -1,9 +1,21 @@
 ﻿using NSE.WebApp.MVC.Extensions;
+using System.Text;
+using System.Text.Json;
 
 namespace NSE.WebApp.MVC.Services
 {
     public abstract class Service
     {
+        protected async Task<T> DeserializarObjetoResponse<T>(HttpResponseMessage response)
+        {
+            return JsonSerializer.Deserialize<T>(await response.Content.ReadAsStringAsync(), _readOptions);
+        }
+
+        protected StringContent ObterConteudo(object dado)
+        {
+            return new StringContent(JsonSerializer.Serialize(dado), Encoding.UTF8, "application/json");
+        }
+
         protected bool TratarErrosResponse(HttpResponseMessage response)
         {
             switch ((int)response.StatusCode)
@@ -17,5 +29,10 @@ namespace NSE.WebApp.MVC.Services
             response.EnsureSuccessStatusCode();
             return true;
         }
+
+        private static readonly JsonSerializerOptions _readOptions = new()
+        {
+            PropertyNameCaseInsensitive = true
+        };
     }
 }

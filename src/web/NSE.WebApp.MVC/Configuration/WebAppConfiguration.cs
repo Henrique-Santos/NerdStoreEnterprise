@@ -1,28 +1,37 @@
 ﻿using Microsoft.AspNetCore.Localization;
+using NSE.WebApp.MVC.Extensions;
 using System.Globalization;
 
 namespace NSE.WebApp.MVC.Configuration
 {
     public static class WebAppConfiguration
     {
-        public static IServiceCollection AddMvcConfiguration(this IServiceCollection services)
+        public static IServiceCollection AddMvcConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllersWithViews();
+
+            services.Configure<AppSettings>(configuration);
 
             return services;
         }
 
         public static IApplicationBuilder UseMvcConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+            //else
+            //{
+            //    app.UseExceptionHandler("/erro/500");
+            //    app.UseStatusCodePagesWithRedirects("/erro/{0}");
+            //    app.UseHsts();
+            //}
 
             app.UseExceptionHandler("/erro/500");
-
+            
             app.UseStatusCodePagesWithRedirects("/erro/{0}");
-
+            
             app.UseHsts();
 
             app.UseHttpsRedirection();
@@ -32,6 +41,8 @@ namespace NSE.WebApp.MVC.Configuration
             app.UseRouting();
 
             app.UseIdentityConfiguration();
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             var supportedCultures = new[] { new CultureInfo("pt-BR") };
             app.UseRequestLocalization(new RequestLocalizationOptions
