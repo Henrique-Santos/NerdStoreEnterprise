@@ -1,4 +1,6 @@
-﻿namespace NSE.Identidade.API.Configurations
+﻿using NSE.WebAPI.Core.Identidade;
+
+namespace NSE.Identidade.API.Configurations
 {
     public static class ApiConfiguration
     {
@@ -20,7 +22,7 @@
 
             app.UseRouting();
 
-            app.UseIdentityConfiguration();
+            app.UseAuthConfiguration();
 
             app.UseEndpoints(endpoints =>
             {

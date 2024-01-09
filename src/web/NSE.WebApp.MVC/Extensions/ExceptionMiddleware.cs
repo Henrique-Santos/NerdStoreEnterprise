@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using Polly.CircuitBreaker;
+using Refit;
+using System.Net;
 
 namespace NSE.WebApp.MVC.Extensions
 {
@@ -18,18 +20,35 @@ namespace NSE.WebApp.MVC.Extensions
             }
             catch (CustomHttpRequestException e)
             {
-                HandleRequestException(context, e);
+                HandleRequestException(context, e.StatusCode);
+            }
+            catch (ValidationApiException e) // Refit
+            {
+                HandleRequestException(context, e.StatusCode);
+            }
+            catch (ApiException e)  // Refit
+            {
+                HandleRequestException(context, e.StatusCode);
+            }
+            catch (BrokenCircuitException)  // Polly
+            {
+                HandleCircuitBreakerException(context);
             }
         }
 
-        private static void HandleRequestException(HttpContext context, CustomHttpRequestException e)
+        private static void HandleRequestException(HttpContext context, HttpStatusCode statusCode)
         {
-            if (e.StatusCode == HttpStatusCode.Unauthorized)
+            if (statusCode == HttpStatusCode.Unauthorized)
             {
                 context.Response.Redirect($"/login?ReturnUrl={context.Request.Path}");
                 return;
             }
-            context.Response.StatusCode = (int)e.StatusCode;
+            context.Response.StatusCode = (int)statusCode;
+        }
+
+        private static void HandleCircuitBreakerException(HttpContext context)
+        {
+            context.Response.Redirect("/sistem-indisponivel");
         }
     }
 }
