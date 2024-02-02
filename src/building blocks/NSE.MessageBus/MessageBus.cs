@@ -84,10 +84,11 @@ namespace NSE.MessageBus
             {
                 _bus = RabbitHutch.CreateBus(_connectionString);
                 _advancedBus = _bus.Advanced;
-                _advancedBus.Disconnected += OnDisconnect;
+                _advancedBus.Disconnected += OnDisconnect; // Evento disparado quando se perde a conexacao com o RabbitMQ
             });
         }
 
+        // Implementando resiliencia. Tentando reconectar infinitas vezes até conseguir.
         private void OnDisconnect(object s, EventArgs e)
         {
             var policy = Policy

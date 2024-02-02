@@ -49,7 +49,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.WebAPI.Core", "src\buil
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MessageBus", "MessageBus", "{8D264292-A454-4666-B899-D0C0167B2B8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSE.MessageBus", "src\building blocks\NSE.MessageBus\NSE.MessageBus.csproj", "{A35705F9-7DCC-4818-803B-93F1C1E292A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.MessageBus", "src\building blocks\NSE.MessageBus\NSE.MessageBus.csproj", "{A35705F9-7DCC-4818-803B-93F1C1E292A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

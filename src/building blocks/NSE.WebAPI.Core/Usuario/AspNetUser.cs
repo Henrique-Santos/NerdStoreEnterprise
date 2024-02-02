@@ -1,6 +1,7 @@
-﻿using System.Security.Claims;
+﻿using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
-namespace NSE.WebApp.MVC.Extensions
+namespace NSE.WebAPI.Core.Usuario
 {
     public class AspNetUser : IAspNetUser
     {

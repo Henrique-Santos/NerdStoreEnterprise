@@ -28,12 +28,12 @@ namespace NSE.Clientes.API.Services
         {
             _bus.RespondAsync<UsuarioRegistradoIntegrationEvent, ResponseMessage>(RegistrarCliente);
 
-            _bus.AdvancedBus.Connected += OnConnect;
+            _bus.AdvancedBus.Connected += OnConnect; // Evento disparado quando o RabbitMQ se conecta a aplicacão
         }
 
         private void OnConnect(object s, EventArgs e)
         {
-            SetResponder();
+            SetResponder(); // Tenta renovar a subscription quando há uma reconeccão
         }
 
         private async Task<ResponseMessage> RegistrarCliente(UsuarioRegistradoIntegrationEvent message)

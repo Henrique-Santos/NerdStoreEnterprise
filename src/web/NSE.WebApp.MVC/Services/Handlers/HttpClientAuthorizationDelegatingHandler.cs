@@ -1,4 +1,4 @@
-﻿using NSE.WebApp.MVC.Extensions;
+﻿using NSE.WebAPI.Core.Usuario;
 using System.Net.Http.Headers;
 
 namespace NSE.WebApp.MVC.Services.Handlers
