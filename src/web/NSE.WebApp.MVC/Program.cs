@@ -1,6 +1,4 @@
-using NSE.WebApp.MVC;
-
-namespace NSE.Identidade.API
+namespace NSE.WebApp.MVC
 {
     public class Program
     {

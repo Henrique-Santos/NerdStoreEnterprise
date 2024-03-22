@@ -32,7 +32,12 @@ namespace NSE.WebApp.MVC.Configuration
                 .AddPolicyHandler(PollyExtensions.WaitAndRetry())
                 .AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
-            services.AddHttpClient<ICarrinhoService, CarrinhoService>()
+            services.AddHttpClient<IComprasBffService, ComprasBffService>()
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
+                .AddPolicyHandler(PollyExtensions.WaitAndRetry())
+                .AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+
+            services.AddHttpClient<IClienteService, ClienteService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 .AddPolicyHandler(PollyExtensions.WaitAndRetry())
                 .AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
@@ -43,7 +48,7 @@ namespace NSE.WebApp.MVC.Configuration
 
     #region PollyExtension
 
-    public class PollyExtensions // Usando Polly para implementar um Retry. Ganhando assim Resiliencia
+    public static class PollyExtensions // Usando Polly para implementar um Retry. Ganhando assim Resiliencia
     {
         public static AsyncRetryPolicy<HttpResponseMessage> WaitAndRetry()
         {

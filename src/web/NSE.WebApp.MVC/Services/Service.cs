@@ -1,5 +1,6 @@
-﻿using NSE.WebApp.MVC.Extensions;
-using NSE.WebApp.MVC.Models;
+﻿using NSE.Core.Communication;
+using NSE.WebApp.MVC.Extensions;
+using System.Net.Mime;
 using System.Text;
 using System.Text.Json;
 
@@ -14,7 +15,7 @@ namespace NSE.WebApp.MVC.Services
 
         protected StringContent ObterConteudo(object dado)
         {
-            return new StringContent(JsonSerializer.Serialize(dado), Encoding.UTF8, "application/json");
+            return new StringContent(JsonSerializer.Serialize(dado), Encoding.UTF8, MediaTypeNames.Application.Json);
         }
 
         protected bool TratarErrosResponse(HttpResponseMessage response)

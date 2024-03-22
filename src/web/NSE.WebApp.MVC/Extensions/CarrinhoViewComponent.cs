@@ -1,21 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NSE.WebApp.MVC.Models;
 using NSE.WebApp.MVC.Services;
 
-namespace NSE.WebApp.MVC.Extensions 
+namespace NSE.WebApp.MVC.Extensions
 {
     public class CarrinhoViewComponent : ViewComponent
     {
-        private readonly ICarrinhoService _carrinhoService;
+        private readonly IComprasBffService _comprasBffService;
 
-        public CarrinhoViewComponent(ICarrinhoService carrinhoService)
+        public CarrinhoViewComponent(IComprasBffService comprasBffService)
         {
-            _carrinhoService = carrinhoService;
+            _comprasBffService = comprasBffService;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(await _carrinhoService.ObterCarrinho() ?? new CarrinhoViewModel());
+            return View(await _comprasBffService.ObterQuantidadeCarrinho());
         }
     }
 }

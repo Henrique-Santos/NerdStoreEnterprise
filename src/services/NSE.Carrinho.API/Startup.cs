@@ -31,6 +31,8 @@ namespace NSE.Carrinho.API
 
             services.AddSwaggerConfiguration();
 
+            services.AddMessageBusConfiguration(Configuration);
+
             services.RegisterServices();
         }
 

@@ -1,15 +1,31 @@
 ﻿using Microsoft.Extensions.Options;
 using NSE.WebApp.MVC.Extensions;
 using NSE.WebApp.MVC.Models;
+using Refit;
 
 namespace NSE.WebApp.MVC.Services
 {
+    // Exemplo do uso do Refit
+    public interface ICatalogoServiceRefit
+    {
+        [Get("/catalogo/produtos/")]
+        Task<IEnumerable<ProdutoViewModel>> ObterTodos();
+
+        [Get("/catalogo/produtos/{id}")]
+        Task<ProdutoViewModel> ObterPorId(Guid id);
+    }
+
+    public interface ICatalogoService
+    {
+        Task<IEnumerable<ProdutoViewModel>> ObterTodos();
+        Task<ProdutoViewModel> ObterPorId(Guid id);
+    }
+
     public class CatalogoService : Service, ICatalogoService
     {
         private readonly HttpClient _httpClient;
 
-        public CatalogoService(HttpClient httpClient,
-            IOptions<AppSettings> settings)
+        public CatalogoService(HttpClient httpClient, IOptions<AppSettings> settings)
         {
             httpClient.BaseAddress = new Uri(settings.Value.CatalogoUrl);
 

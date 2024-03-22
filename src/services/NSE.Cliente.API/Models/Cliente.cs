@@ -21,5 +21,15 @@ namespace NSE.Clientes.API.Models
             Cpf = new Cpf(cpf);
             Excluido = false;
         }
+
+        public void TrocarEmail(string email)
+        {
+            Email = new Email(email);
+        }
+
+        public void AtribuirEndereco(Endereco endereco)
+        {
+            Endereco = endereco;
+        }
     }
 }
