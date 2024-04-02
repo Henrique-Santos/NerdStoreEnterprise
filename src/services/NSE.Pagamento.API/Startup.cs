@@ -1,7 +1,7 @@
-﻿using NSE.Catalogo.API.Configuration;
+﻿using NSE.Pagamento.API.Configurations;
 using NSE.WebAPI.Core.Identidade;
 
-namespace NSE.Catalogo.API
+namespace NSE.Pagamento.API
 {
     public class Startup
     {

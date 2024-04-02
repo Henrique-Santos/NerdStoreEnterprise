@@ -61,6 +61,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Pedido.Domain", "src\se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Pedido.Infra", "src\services\NSE.Pedido.Infra\NSE.Pedido.Infra.csproj", "{AC3BB210-D728-4184-95CF-A2F87C6AA4DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSE.Pagamento.NerdsPag", "src\services\NSE.Pagamento.NerdsPag\NSE.Pagamento.NerdsPag.csproj", "{509D7CE0-D0A6-48D2-90EB-98F11B088740}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -119,6 +121,10 @@ Global
 		{AC3BB210-D728-4184-95CF-A2F87C6AA4DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC3BB210-D728-4184-95CF-A2F87C6AA4DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC3BB210-D728-4184-95CF-A2F87C6AA4DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{509D7CE0-D0A6-48D2-90EB-98F11B088740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{509D7CE0-D0A6-48D2-90EB-98F11B088740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{509D7CE0-D0A6-48D2-90EB-98F11B088740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{509D7CE0-D0A6-48D2-90EB-98F11B088740}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,6 +158,7 @@ Global
 		{E1F78C96-3988-446A-BD4F-D60CA26CB633} = {79EB6B80-4A00-401C-93C5-98324D962CCA}
 		{0AC831AA-AE4F-49A3-8F65-05CF392AD1E5} = {33BB0AED-3177-4F9F-B55B-538AD16DD577}
 		{AC3BB210-D728-4184-95CF-A2F87C6AA4DE} = {33BB0AED-3177-4F9F-B55B-538AD16DD577}
+		{509D7CE0-D0A6-48D2-90EB-98F11B088740} = {707D6CAC-4450-4F51-980F-412CAA786D05}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DF555903-B208-431D-8D95-1B36CAE51DEC}
