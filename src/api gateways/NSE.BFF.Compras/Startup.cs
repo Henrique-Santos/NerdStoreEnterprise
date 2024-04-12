@@ -30,6 +30,7 @@ namespace NSE.BFF.Compras
             services.AddSwaggerConfiguration();
             services.RegisterServices();
             services.AddMessageBusConfiguration(Configuration);
+            services.ConfigureGrpcServices(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

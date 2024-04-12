@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NetDevPack.Security.Jwt.Core.Jwa;
 using NSE.Identidade.API.Data;
 using NSE.Identidade.API.Extensions;
-using NSE.WebAPI.Core.Identidade;
 
 namespace NSE.Identidade.API.Configurations
 {
@@ -10,6 +10,17 @@ namespace NSE.Identidade.API.Configurations
     {
         public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
+            var appTokenSettingsSection = configuration.GetSection("AppTokenSettings");
+            services.Configure<AppTokenSettings>(appTokenSettingsSection);
+
+            // Persistencia das chaves no BD
+            services.AddJwksManager(options =>
+            {
+                options.Jws = Algorithm.Create(AlgorithmType.RSA, JwtType.Jws);
+                options.Jwe = Algorithm.Create(AlgorithmType.RSA, JwtType.Jwe);
+            })
+            .PersistKeysToDatabaseStore<ApplicationDbContext>();
+
             services.AddDbContext<ApplicationDbContext>(options =>
                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
@@ -18,8 +29,6 @@ namespace NSE.Identidade.API.Configurations
                 .AddErrorDescriber<IdentityMensagensPortugues>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-
-            services.AddJwtConfiguration(configuration);
 
             return services;
         }
